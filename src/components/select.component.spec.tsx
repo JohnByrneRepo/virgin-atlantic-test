@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-preact-pure';
 import { SelectComponent } from './select.component';
 
 configure({ adapter: new Adapter })
-3
+
 describe('SelectComponent', () => {
     it('should display the input correctly', async () => {
         const select_component = mount(<SelectComponent name="location" label="Destination" id="location_field" value={""} options={LOCATIONS} required={true} />)
