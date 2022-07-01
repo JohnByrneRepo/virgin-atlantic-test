@@ -25,12 +25,13 @@ export default function FilterCheckboxes(props: Options): JSX.Element {
     if (options.includes(selectedOption)) {
       const newOptions = options.filter((option) => option !== selectedOption);
       setOptions(newOptions);
+      props.onChange(props.type, newOptions)
     } else {
       const newOptions = [...options];
       newOptions.push(selectedOption);
       setOptions(newOptions);
+      props.onChange(props.type, newOptions)
     }
-    props.onChange(props.type, options)
   };
 
   return (

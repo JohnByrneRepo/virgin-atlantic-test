@@ -22,35 +22,59 @@ export default function HolidayComponent(props: HolidayComponentProps): JSX.Elem
   const [holidayData, setHolidayData] = useState<Holiday[]>(props.holidays)
 
   useEffect(() => {
-    const data = { ...holidayData }
-    // const filteredData = data.filter(holidayItem => {
-    //   const facilities = holidayItem.hotel.content.hotelFacilities;
-    //   let facilitySelected = false;
-    //   for (let i = 0; i < filterOptions.facilities.length; i++) {
-    //     const facility = filterOptions.facilities[i];
-    //     for (let j = 0; j < facilities.length; j++) {
-    //       if (facilities[j] === facility) {
-    //         facilitySelected = true;
-    //       }
-    //     }
-    //   }
-    //   return (
-    //     holidayItem.totalPrice >= filterOptions.pricePerPerson.min
-    //     &&
-    //     holidayItem.totalPrice <= filterOptions.pricePerPerson.max
-    //   ) ||
-    //   (
-    //     holidayItem.hotel.content.starRating <= filterOptions.starRating.max
-    //     &&
-    //     holidayItem.hotel.content.starRating >= filterOptions.starRating.min
-    //   ) || facilitySelected
-    // })
-    // setHolidayData(filteredData)
-  }, [filterOptions, holidayData])
+    setHolidayData(props.holidays)
+  }, [])
+
+  useEffect(() => {
+    const data = [...props.holidays]
+    if (data.length > 0) {
+      const filteredData = data.filter(holidayItem => {
+        const facilities = holidayItem.hotel.content.hotelFacilities;
+        let facilitySelected = false;
+        if (filterOptions.facilities.length === 0) {
+          facilitySelected = true
+        } else {
+          for (let i = 0; i < filterOptions.facilities.length; i++) {
+            const facility = filterOptions.facilities[i];
+            for (let j = 0; j < facilities.length; j++) {
+              if (facilities[j] === facility) {
+                facilitySelected = true;
+              }
+            }
+          }
+        }
+
+        const priceSelected = (
+          holidayItem.totalPrice >= filterOptions.pricePerPerson.min
+          &&
+          holidayItem.totalPrice <= filterOptions.pricePerPerson.max
+        ) || 
+        (
+          filterOptions.pricePerPerson.min === 0
+          &&
+          filterOptions.pricePerPerson.max === 0
+        )
+
+        const starSelected = (
+          holidayItem.hotel.content.starRating >= filterOptions.starRating.min
+          &&
+          holidayItem.hotel.content.starRating <= filterOptions.starRating.max
+        ) || 
+        (
+          filterOptions.starRating.min === 0
+          &&
+          filterOptions.starRating.max === 0
+        )
+
+        return priceSelected && starSelected && facilitySelected
+      })
+      setHolidayData(filteredData)
+    }
+  }, [filterOptions, props.holidays])
 
   return (
     <div>
-      {props.holidays.map(holiday =>
+      {holidayData.map(holiday =>
         <Container>
           <div>
             <h1>{holiday.hotel.name}</h1>
