@@ -1,0 +1,1 @@
+{"mappings":"AAEA","sources":["src/components/date.module.less"],"sourcesContent":["@import (reference) \"../less/styled-components.include.less\";\n\n.date-component {\n  input {\n    width: 100%;\n    padding: 12px 16px;\n  }\n}"],"names":[],"version":3,"file":"index.bfeba6eb.css.map","sourceRoot":"/__parcel_source_root/"}
