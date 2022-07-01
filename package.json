@@ -7,7 +7,7 @@
     "start": "parcel serve src/index.html --https",
     "test": "jest --config jest.config.js",
     "build": "parcel build src/index.html",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
