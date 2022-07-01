@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel serve src/index.html --https",
-    "test": "jest --config jest.config.js"
+    "test": "jest --config jest.config.js",
+    "build": "react-scripts build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,7 @@
   "@parcel/transformer-css": {
     "cssModules": true
   },
-  "homepage": "https://github.com/virginatlanticdevelopment/front-end-test#readme",
+  "homepage": "http://johnbyrnerepo.github.io/virgin-atlantic-test",
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
@@ -37,6 +39,7 @@
     "autoprefixer": "^9.7.4",
     "enzyme": "^3.11.0",
     "enzyme-adapter-preact-pure": "^2.2.0",
+    "gh-pages": "^4.0.0",
     "jest": "^25.1.0",
     "parcel": "^2.0.0",
     "parcel-transformer-tsc-sourcemaps": "^1.0.2",
